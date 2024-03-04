@@ -5,6 +5,7 @@ import Button from "../Button";
 import BottomWarning from "../BottomWarning";
 import axios from "axios";
 import { useState,useRef } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Signup = () => {
   const [firstname, setfirstname] = useState("");  
@@ -15,7 +16,7 @@ const Signup = () => {
   const lastnameRef = useRef(null);
   const usernameRef = useRef(null);
   const passwordRef = useRef(null);
-
+  const navigate =useNavigate()
   const clickHandler = async ()=>{
     const response= await axios.post("http://localhost:3000/api/v1/user/signup",{
          username,
@@ -29,6 +30,7 @@ const Signup = () => {
     lastnameRef.current.value=""
     usernameRef.current.value=""
     passwordRef.current.value=""
+    navigate("/dashboard")
   } 
 
   return (
