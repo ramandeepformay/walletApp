@@ -6,28 +6,22 @@ const Sendmoney = () => {
     const name = params.get("name");
     const id = params.get("id")
     const [value, setValue] = useState("")
-    
-
+    const [transfer, setTransfer] = useState("")
+   
     const clickHandler =async ()=>{
-        const [transfer, setTransfer] = useState("")
-    
-        const getData =async ()=>{
-            const res = await axios.post("http://localhost:3000/api/v1/account/transfer",{
+      
+        const res = await axios.post("http://localhost:3000/api/v1/account/transfer",{
                 to: id,
                 amount: value
             },{
                 headers:{
-                    Authorization: "Bearer" + localStorage.getItem("token")
+                    Authorization: "Bearer" + " "+localStorage.getItem("token")
                 }
             })
             return setTransfer(res.data.msg)
         }
-        useEffect(()=>{
-           const msg= getData()
-           return msg;
-        },[])
-    }
     
+
     return (
     <div className="bg-slate-300 h-screen flex flex-col justify-center">
       <div className="w-96 bg-white h-80 mx-auto rounded shadow-lg">
@@ -43,7 +37,7 @@ const Sendmoney = () => {
             <input type="text" placeholder="Enter amount" className="my-2 w-80 border rounded-md p-2 " value={value} onChange={e=>setValue(e.target.value)}/>
           </div>
           <div className="flex flex-col justify-center items center">
-            <button className="bg-green-600 p-2 text-center mt-2 text-white w-80 rounded" onClick={clickHandler}>Initiate transfer</button>
+            <button className="bg-green-600 p-2 text-center mt-2 text-white w-80 rounded" onClick={clickHandler}>{transfer==""? "Initiate Transfer":"Done"}</button>
           </div>
         </div>
         </div>

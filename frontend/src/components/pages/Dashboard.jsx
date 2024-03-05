@@ -6,9 +6,9 @@ import { useEffect, useState } from "react";
 const Dashboard = () => {
   return (
     <div>
-      <Appbar />
-      <Balance label="10,000" />
-      <Users />
+      <Appbar/>
+      <Balance/>
+      <Users/>
     </div>
   );
 };
